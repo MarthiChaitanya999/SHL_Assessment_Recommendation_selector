@@ -35,7 +35,7 @@ def load_or_scrape_data():
     return df
 
 # Set up API endpoint
-API_ENDPOINT = "http://localhost:8000"
+API_ENDPOINT = "https://shl-assessment-recommendation-selector.onrender.com"
 
 # Function to call the FastAPI backend
 def get_recommendations_from_api(query, max_results=10):

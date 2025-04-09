@@ -1,0 +1,60 @@
+🧠 System Architecture (Textual Layout)
+1. User Interface Layer
+🧑 User
+→ Sends query
+→ Views recommendations
+
+🟩 Streamlit Web UI (app.py)
+→ Accepts query
+→ Calls FastAPI endpoint
+→ Visualizes results
+
+2. FastAPI Service Layer
+🟩 FastAPI Backend (api.py)
+→ Exposes /recommend?query=... endpoint
+→ Calls data processing logic
+→ Returns JSON recommendations
+
+🔵 Uvicorn
+→ Runs FastAPI app
+
+3. Processing & Integration
+🟩 Configuration (.env)
+→ Stores API keys
+
+🟧 OpenRouter Integration (openrouter_api.py)
+→ Accepts query
+→ Returns embeddings
+
+🟦 Data Processing (Pandas / NumPy / Plotly)
+→ Reads from CSV
+→ Uses LLM embeddings
+→ Computes top assessments
+
+4. Data Acquisition & Store
+🟦 Data Scraper (scrape_shl2.py)
+→ Scrapes SHL site
+→ Saves data
+
+🟨 Data Store (shl_assessments.csv)
+→ Stores structured assessment data
+→ Read by processing module
+
+
+User → Streamlit → FastAPI → Data Processing
+      ↘ visualization ← JSON ←↖
+          Data Store ← scrape_shl2.py
+          ↖          ↙
+    OpenRouter (embeddings)
+
+
+📈 Flow Summary
+User → Streamlit → FastAPI → Data Processing
+
+Data Processing ↔ OpenRouter
+
+Data Processing ↔ shl_assessments.csv
+
+Streamlit ← JSON ← FastAPI
+
+Scraper → CSV
